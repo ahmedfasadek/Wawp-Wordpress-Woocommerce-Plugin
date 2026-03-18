@@ -535,6 +535,49 @@ function startProgressTimeline($target) {
         hideTabsIfSingle();
     });
 
+
+     /* ------------------------------------------------------------
+     * Solve fronted signin buttons disabled
+     * ---------------------------------------------------------- */
+    
+    jQuery(document).ready(function($) {
+    $(document).on('mouseenter', '.awp-btn', function() {
+        var $btn = $(this);
+        
+        $btn.css('pointer-events', 'auto');
+        $btn.removeAttr('disabled');
+        $btn.removeClass('disabled loading blockUI');
+        });
+    });
+
+
+     /* ------------------------------------------------------------
+     * Solve phone Field Add Country key
+     * ---------------------------------------------------------- */
+
+    jQuery(document).ready(function($) {
+    var typingTimer;                
+    var doneTypingInterval = 1000;
+    var $input = $('#awp_phone'); 
+    $input.on('keyup', function () {
+        clearTimeout(typingTimer);
+        if ($input.val()) {
+            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        }
+    });
+    $input.on('keydown', function () {
+        clearTimeout(typingTimer);
+    });
+    function doneTyping () {
+        var $whatsappBtn = $('.awp-request-btn[data-method="whatsapp"]');
+        if ($whatsappBtn.length) {
+            $whatsappBtn.focus();
+        }
+        }
+    });
+
+
+    
     /* ------------------------------------------------------------
      * Password show/hide
      * ---------------------------------------------------------- */
